@@ -356,12 +356,68 @@
         
         - "When you are using inheritance, give second thought which makes more sense, can composition?"     
     ```
+
+
+22. **Right way to approach LLD Problem**: <br/>
+    ```
+    Two reasons why you would find a LLD Problem hard?
+    1. You dont know what to design?
+        - Do Concrete Requirement Gatherings very clearly
+            e.g. Design Amazon:
+                    4-5 Requirements clarification
+                    Data to store
+                    APIs
+    2. Unstructured thinking?
+        e.g. You made Product, Cart, Price classes (low-level/independant) and were not able to establish relations between them.
+        So you followed bottom-top approach. This does not work.
     
-22. **Case-Studies: Easy**: <br/>
+        e.g. Design House Problem:
+        Cant design drawing room, toilets, bathroom, bedrooms first and then weave them.
+        
+        - Top-Bottom Thought process: (For all LLD/Machine Coding Problems)
+            * Think around GUI (Web/Mobile) and user interactions [No points on this from interviewer]
+                - gives you idea around APIs, parameter and response
+                - think around possible flows - features, clarity of input of FE sends to backend
+            * Think about database tables [No points on this from interviewer]
+            * LLD is mediator in b/w GUI and Database - which is server (LLD);
+                - Thinking about GUI and Database gives you hints
+                - You won't come up with most robust code in one iteration
+                - But your design would be functionally correct & pluggable in end to end system
+            
+            - APIs are functions & req payload is parameter to those function
+            - Imagine then GUI and Database are abstracted out, then focus on LLD designing. 
+            - Store data in maybe Hashmap in-memory to mimic DB.
+    ```
+
+
+23. **Case-Studies: Easy**: <br/>
     a. *Generic things about LLD*: <br/>
         ```
         - 
         ```
 
-    
 
+30. **TESTABILITY**:
+
+    * *Test Driven Development*:
+        * First write unit test classes for the actual classes you have written.
+        * Coverage report - line coverage, branch coverage reports.
+        * Unit tests covering all the scenarios.
+        * Real classes written in the best possible manner following LLD principles.
+        * Unit - individual part of large complex system. We test for one particular thing/class at a time. i.e. We test one class.
+            * We sideline other dependencies like classes , external resources - third party servers, cache, db.
+                * Mocking is used to sideline dependencies.
+            * New developer can write and test his new class.
+            * Unit tests failing points to any class with the bug in development.
+        * Unit tests are class specific - Functionally correct class, well-designed and presented independently. All SOLID principles, and best of design patterns.
+        * Unit tests fail before building. So that prevents buggy code getting deployed to production.
+        * Write Expected inputs, and outputs.
+
+    * *Phases of Unit Testing (3 phases)*:
+        1. Initialise the system under test -> Single class or group of classes
+        2. Invoke system under test -> invoke method
+        3. Compare expected and actual result -> Sometimes you want to compare behaviours also (exceptions, internal method calls etc.)
+
+    ```java
+        
+    ```
