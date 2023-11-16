@@ -1,0 +1,87 @@
+* Simple two player chess game, turn by turn (Round Robin)
+* Game should support human player and computer player e.g. HH, HC, CC
+* Game should cater to all standard chess rules:
+    - 2 players each with 16 pieces.
+    - Each:
+        8 pawns, 2 bishops, 2 knights, 1 king, 1 queen, 2 elephants (rook)
+    - Checkmate:
+        king captured, cannot move
+    - Pawn:
+        capture diagonally, first move, normal move
+    - Rook:
+        cannot jump over same color pieces, capture other color pieces
+    - Bishop:
+        moves diagonally, cannot jump over pieces, can just capture
+    - Queen:
+        combination of Rook and Bishop, cannot jump over pieces, can just capture
+    - Knight:
+        L shape - 8 moves possible, jump over other pieces, capture if destination has a piece.
+    - King:
+        one step in all 8 directions.
+    Dimension:
+        standard: 8x8
+    Black pieces 2 rows to themselves, first row - specific order, second row - pawns
+    White pieces " "
+
+Whatever, piece of code you write should ensure is extensible to other boardgames like Snake and Ladder.
+
+Solution:
+    - Class BoardGame:
+        - abstract Player - different games can have different players, and player can be human and computer
+        - Interface/abstract Board (Different games implement different boards) - DIP (classes should depend on abstractions)
+
+        - BoardGame is not made interface because, startGame() body is so generic, it can be reused by almost all games.
+        - So we used it over interface.
+        - Abstract class helps us to share common functionality across different children.
+        - It has an abstract method, children will be forced to implement in their own way.
+
+        - BoardGame is made abstract , once its made abstract it needs abstract method
+        - Because, in startGame() we need to check if game is over, which will vary across games
+
+    - Interface Board, :- BoardGame depends on this interface
+
+    - Concrete class Chess:
+        - will be passed two players
+        - will be passed current board i.e. Class ChessBoard which implements I Board
+        to calculate isOver()
+
+    - Class Chessboard:
+        - 2d list of cells i.e. ChessCell Class
+
+
+    - Class ChessCell:
+        - final x, y
+        - can/cannot have chess piece inside it, some cells will have this attribute as NULL, which might cause null pointer exception
+        - to handle optional fields, JAVA provides field like optional, which you can check if it is present using isPresent()
+        - piece that it contains can change
+        - final for chess piece is hence not correct option
+
+    - ChessPiece: an interface since many concrete types will implement this
+        - ENUM for PieceName
+        - All PieceName classes will implement ChessPiece
+        - e.g. pawn will have certain variables inside it
+            color - white/black
+        - move() should be focussed on implementing last
+
+    BoardGame <- ChessGame/Chess <- ChessBoard <- ChessCell <- ChessPiece
+
+    Player <- ChessPlayer (getPiece) <- Chess
+
+    ChessPlayer <- HumanChessPlayer, ComputerChessPlayer
+    // human, ai might want to take look at ChessBoard then decide on what move to make next
+
+    BoardGame, Player - L1 topmost abstraction
+
+    ChessBoard, Chess, ChessPlayer - L2 // mapped together only if at same level of abstraction
+
+    HumanChessPlayer, ComputerChessPlayer - L3
+
+    // stitch
+    - makeMove() for human chess player
+    - display() for chessBoard
+
+    some classes implement other public methods of its own other than mentioned in abstract classes/interfaces
+    e.g. ChessPlayer (getPiece), ChessBoard(getCell)
+    for their utility by lower level modules
+
+

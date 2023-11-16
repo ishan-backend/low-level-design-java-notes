@@ -396,6 +396,79 @@
         - 
         ```
 
+24. **Case-Studies: Medium**: <br/>
+    a. *Food Delivery System*: <br/>
+    ```
+    * Requirements: (Draw it from Feel of GUI)
+            1. Search + Filters:
+                - Users should be able to search for food items &/or restaurants by their names.
+                - They should be able to put filters (Meal-Type: (Veg/NonVeg), Cuisine-Type: (Italian + German), Rating > 4 stars, Close to my location etc)
+                    
+            
+            2. For fetched food item, navigate to associated restaurant, check menu/price-list, add items to cart and place order.
+            3. Different modes of payment should be supported (Netbanking, Cardbasedpayment)
+            4. A cart cant contain food items from multiple restaurants.
+            5. System should contain important info for delivery like delivery address, contact number
+            6. User should be able to track order status: ORDER_PLACED, COOKING, READY_FOR_PICKUP, OUT_FOR_DELIVERY, DELIVERED, RETURNED. Certain user personas can make state change from initial to final, depending on use-case.
+                - A user can cancel order, if order status is <= COOKING
+            7. System should provide ETA for delivery.
+            8. User should be able to provide rating+feedback for order.
+            9. Restaurants should be able to register on platform. Admin approval needed.
+            10. Restaurants should be able to update costings, food item availability and open/close timings.
+            
+            BONUS:
+                a) Coupon Codes
+                b) Notification system
+    
+    * Approach:
+        1. High Level APIs (Decide on important APIs needed from GUI aspect)
+                a) Food Item Searcher API
+                    i/p: String FoodItemName, Filters:  
+                    o/p: List<FoodItem> 
+                b)  Restaurant Searcher API
+                    i/p: String RestaurantName, Filters:  
+                    o/p: List<Restaurant> 
+                c) food item from searcher api to - web page with restaurant details (food item id, restautant id)
+                    GetRestaurantById API
+                    i/p: Integer rId
+                    o/p: Restaurant
+                d)  GetFoodItemById API
+                    i/p: Integer fooditemId
+                    o/p: FoodItem
+                e)  AddToCart API (user authentication JWT token needed )
+                    i/p: UserToken, foodItemId
+                    o/p: 200 OK, item added to cart successfully
+                f)  PlaceOrder API
+                    i/p: UserToken, PaymentMode, PaymentDetails
+                    o/p: Order (id, status, ...)
+    
+                    DB Cart Table: user_id, food_item_id, bool checked_out
+                g)  UpdateOrder API
+                    i/p: order_id, new status, user_token
+                    o/p: 200 OK, status update successfully
+    
+        2. Create Different classes for different APIs. Those classes will have function for the API.
+           Tester class main method will create instances of these classes, and will call methods.
+        
+        3. Think of Business Classes with SOLID principles, extensibility, cleanliness:
+
+            * FoodItemSearcher API
+                - ENUMs and certain ENUMs would be required as range filter e.g. StarRating
+                - FoodItem class with associated DB cols as fields with constructor and getters
+                 
+                - Searcher is Business Component, should be generic searcher
+                        - it has to fetch from database items which has similar name
+                        - with same meal type
+                        - with same cuisine type
+                "get only those food items where name=foodItemName and (mT is mealType) and (cT in CuisineType) and (r > Rating)"
+                - Since with passage of time, filters length might increase and their logic will change overtime, we will keep it seperately in filters F1, F2, F3
+                    - F1 (mT is mealType) 
+                    - F2 (cT in CuisineType) 
+                    - F3 (r > Rating)
+                    Also different filters mean different algorithms.
+                
+    ```
+
 
 30. **TESTABILITY**:
 
