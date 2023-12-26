@@ -1,0 +1,307 @@
+Single Responsibility Principle
+1. Take an Example of employe class with the following Methods
+
+CalculateSalary()
+PrintPerformanceReport()
+RetrieveBioData()
+2. The Above class is doing the following things
+
+Employee attribute Management
+Salary Calculation with some given logic
+Printing performance report with some given logic
+Retrieving Bio data of some employe
+3. These things themselves are the complex operations example salary calculation may contain Bonus rewarded ,  stocks rewarded , Taxes deduction etc.
+
+4. These types of classes have multiple reasons for changes which is considered as very bad practice .
+
+5. Scenario where above class needs to change are
+
+Finance department changes the logic of salary calculation
+
+Some top executives wants to change the format of performance report
+
+6. First Design Principle : A class must have only one reason to change (This principle is also known as single responsibility principle).
+
+7. As long as we have a class which can change because of multiple reasons , it means that class is not binded by SRP.
+
+8. We can solve the problem in the above example (employee class) by creating new separate classes , and in those classes we can define methods which will take the instance of employee class as a parameter.
+
+
+
+9. Example of class not following SRP
+
+class Employee
+
+{
+
+ int CalculateSalary()
+
+    {
+
+
+
+    }
+
+ void PrintPerformanceReport()
+
+    {
+
+
+
+    }
+
+ vector<string> RetrieveBioData()
+
+    {
+
+
+
+    }
+
+};
+
+Example of class following SRP
+
+class Employee
+
+{
+
+    //working code
+
+};
+
+
+
+class SalaryCalculator
+
+{
+
+ int CalculateSalary(Employee e)
+
+    {
+
+
+
+    }
+
+};
+
+
+
+class PerformanceReportPrinter
+
+{
+
+ void PrintPerformanceReport(Employee e)
+
+    {
+
+
+
+    }
+
+};
+
+
+
+class BioDataRetrive
+
+{
+
+ vector<string> RetrieveBioData(Employee e)
+
+    {
+
+
+
+    }
+
+};
+
+
+10. This makes our code less fragile.
+
+Open Closed Principle
+1.  Let's consider the scenario of a game with some superheroes (Spider Man , Bat Man, Captain America ). Now we have two classes , Attacker and SuperHero.
+
+Now in SuperHero class we have following methods
+
+attackWithCaptainAmerica()
+
+attackWithBatMan()
+
+attackWithSpiderMan()
+
+And the Attacker class has a list of superHeroes from which we want to attack.
+
+2. Now to execute the attack we always need to check through switch statements or if-else statements which super hero attack method we have to invoke present in SuperHero class. It is not a good coding practice to have multiple conditional statements in our code.
+
+3. Let's imagine we want to add a new superhero Iron Man in our game , for that we have to make changes in our code in multiple positions. Example conditional statements in SuperHero class , attack Method in attacker class . Hence We are unable to extend new features without modifying the existing code.
+
+4. We should be able to extend new features without modifying the existing code.
+
+5. Ideal expectations is that the different classes should be independent of each other
+
+6. In the above example , SuperHero is an abstract thing whereas CaptainAmerica , BatMan , IronMan, SpiderMan are concrete things.
+
+7. Code Should be written in such a way so that you are coding to abstraction , Not to concretion.
+
+9. Concretion means Our Module Attacker Just not only knows about SuperHero , But also their attributes and methods i.e. CaptainAmerica , BatMan, SpiderMan, attackWithCaptainAmerica(), attackWithBatMan(), attackWithSpiderMan().
+
+10. Second Design Principle : A class should be open for extension but close for modification. This principle is also known as OCP.
+
+11. We can Use Polymorphism to solve this Problem we faced in the above example.
+
+12. We can create an interface called SuperHero and make different classes for CaptainAmerica , BatMan , SpiderMan with their own attack Method . Now if we want to add any other SuperHero like Iron Man , then we can do it very easily without making any modification to our existing code.
+
+13. We can see the dependency diagram has changed significantly.
+
+
+
+
+
+
+Liskov Substitution Principle
+1. Let’s suppose there is an abstract class Employee with an abstract method salary calculator . Also we have some concrete classes FTE and INTERN. Now the payslip calculation logic is different for both of these two , as FTE may have some stocks whereas Intern will have only fixed stipends.
+
+2. Let’s suppose we have a volunteer class as well , now these volunteers won't take any salary for their work But need all other methods and attributes of the employee class .
+
+3. Here comes the problem. If for the volunteer class we return 0 as salary from the salary calculator method then it may arise many problems in our near future.
+
+4. Hence invocation of the salary calculator method of an employee on an instance of the volunteer class is totally incorrect and illegal
+
+5. Whenever something illegal happens in our code , we throw an error code or an exception.
+
+6. But throwing an exception is not a proper solution for this problem , as it may also cause some drastic consequences in the near future.
+
+7.Hence we should never use inheritance for code reuse.
+
+8. We should use inheritance if and only if it has a strict “ IS - A “ relationship.
+
+9. Example : FTE IS A employee , Intern IS A Employee , But Volunteer IS NOT A Employee.
+
+10. Liskov Substitution Principle :  The Liskov Substitution Principle (LSP) states that objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
+
+11. In other words, what we want is to have the objects of our subclasses behaving the same way as the objects of our superclass
+
+Interface Segregation Principle
+1. Let’s take an example of designing a cricket game.
+
+It has a variety of players.
+Important entity is the player Hence Player should be abstract . So we will define an interface of Player.
+2. Let Player has different methods which are
+
+Bat()
+Bowl()
+Field()
+KeepWicket()
+3. There can be different concrete classes which may or may not use every method of the interface but requires a subset of that interface. Example PureBatMan only requires Bat() and Field() , WicketKeeper Only Needs KeepWicket() and Bowl().
+
+4.  Hence Defining every abstract method for every class is not a good option. As it will not fit properly in the Inheritance Tree.
+
+5. Inheritance Hierarchy is Tricky.
+
+6. A new Entity that comes might be composed of some subsets of behavior which cannot be achievable through existing Inheritance Tree.
+
+7. Player interface need not contain all methods i.e Bat() , Bowl(), Field(), KeepWicket().
+
+8.  Instead of a single interface , we can create different multiple interfaces.
+
+
+
+ InterFace Method
+
+<< interface >> Player    →    Bat()
+
+<< interface >> Bowler   →    Bowl()
+
+<< interface >> Fielder   →    Field()
+
+<< interface >> Keeper   →    KeepWicket()
+
+9. We are allowed to create a class which can implement multiple interfaces.
+
+10. We can implement interfaces and classes in the shown manner.
+
+
+
+
+11. We have implemented all abstract entities in a flat manner , which means they do not have any hierarchy or dependencies between them. Now if we want to add another abstract entity then we can easily do it without any difficulties.
+
+12. Composition is better than inheritance.
+
+13. NOTE : Be cautious while making different interfaces, do it only when it is extremely important else you will end up flooding out your code with multiple non needed interfaces.
+
+14.  Interface Segregation principle : “Clients should not be forced to depend upon interfaces that they do not use.”
+
+Dependency Inversion Principle
+1. High Level Modules or classes or any piece of code we wrote from scratch should depend upon abstract classes or interface. It should not depend upon concretion.
+
+2. Let’s take an example of an e-commerce System.It will have components for Purchase Flow Manager which will Manage the payments and send notification to the users for their purchase and payments.
+
+3. Now we Know that if we assign two works i.e. Payment process and notification sending to one single class or entity then it will violate our Single Responsibility design Principle.
+
+4. Hence we will divide Purchase Flow Manager ( High Level Module ) into further interfaces and classes (Low Level Modules).
+
+5. As we can see in the diagram, we have implemented two interfaces which are Payment Processor and Notification Sender, Which can be further divided into sub parts.
+
+
+
+
+6. Payment can be done using different modes like cash , UPI , Net Banking , Debit Card etc Hence there will be separate classes for each method. Same goes for Notification sender , Notification can be sent via SMS or Email , so there will be separate classes for these too.
+
+7.Dependency Inversion Principle : It says that High Level Module Should not depend on Low Level Modules Rather Both should depends on Abstractions
+
+8. Using DIP also asserts the Open Close Principle.
+
+9. Always Make sure not to depend upon the business logic class because they change very frequently.
+
+10. Consider this piece of code.
+
+public class PurchaseFlowManager
+
+{
+
+    private final PaymentProcessor paymentProcessor;
+
+    private final NotificationSender notificationSender;
+
+
+
+    public PurchaseFlowManager(PaymentProcessor paymentProcessor,NotificationSender notificationSender)
+
+    {
+
+ this.paymentProcessor = paymentProcessor;
+
+ this.notificationSender = notificationSender;
+
+    }
+
+
+
+    public void triggerPurchaseFlow(int productId, int customerId)
+
+    {
+
+        //some stuff
+
+    }
+
+}
+
+We are coding against the interfaces , Not against the concrete interfaces.
+
+Now it's up to the user what instance of PaymentProcessor and What instances of NotificationSender it wants to inject over here.
+
+This thing is also known as Dependency injection.
+
+11.Dependency Injection can be very useful as it allows us to compose PurchaseFlowManager of different behavior. Example UPI + SMS , Net Banking + Email etc .
+
+12. Using Dependency injection we delay the new() Keyword. Hence we are not creating any new Instance , instead User creates the instances according to their needs.
+
+13. We can Perform Better Testing Using Dependency Injection.As it allows us to Test a single Unit or class .
+
+14. Many Unit Testing Frameworks give us the features of Mocked Objects for unit testing.
+
+15.Mocked Objects are the replica of the object of some other class which will be needed while testing the current module so that we don’t have to switch between modules or classes while testing.

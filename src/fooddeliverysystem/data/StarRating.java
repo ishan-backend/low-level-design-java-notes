@@ -1,4 +1,4 @@
-package fooddeliverysystem.api.data;
+package fooddeliverysystem.data;
 
 public enum StarRating {
     ONE(1),

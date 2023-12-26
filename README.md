@@ -456,7 +456,7 @@
                 - ENUMs and certain ENUMs would be required as range filter e.g. StarRating
                 - FoodItem class with associated DB cols as fields with constructor and getters
                  
-                - Searcher is Business Component, should be generic searcher
+                - Searcher is Business Component, should be generic searcher (OCP)
                         - it has to fetch from database items which has similar name
                         - with same meal type
                         - with same cuisine type
@@ -466,7 +466,11 @@
                     - F2 (cT in CuisineType) 
                     - F3 (r > Rating)
                     Also different filters mean different algorithms.
-                
+    
+            * RestaurantSearcher API
+                - with introduction of this, filters merge with above api as well
+    
+            * 
     ```
 
 

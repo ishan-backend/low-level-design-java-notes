@@ -1,0 +1,17 @@
+* usage of `new` keyword is not good. Reason (what kind of problems get automatically introduced when using new):
+    - we can do `new` only of concrete class. It violates DIP (your class should only depend on interfaces and abstract classes) and not concretions, which in turn reduces flexibility of code.
+    - we cannot do `new` of interfaces and abstract classes
+
+    - we can defer/delay usage of new keyword, but we cannot absolutely remove it
+    - new keyword starts getting accumulated somewhere else. These should move to high-level classes / trigger points / user facing.
+
+    1. Lose Flexibility - if we use new keyword, and depend directly on concretions
+        e.g. Chess board can be flexible 16x16 , 8x8 etc, of various origins, players etc.
+
+        Solution:
+            - Dependency Injection using polymorphic type (interface / abstract class)
+
+
+* We can remove new keyword, using Dependency Injection. By using a polymorphic type (interface), and you can pass that in constructor.
+
+* When type is being mapped to creational responsibility, then this gives birth to factory pattern.

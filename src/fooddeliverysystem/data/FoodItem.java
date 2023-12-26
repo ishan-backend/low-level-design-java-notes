@@ -1,4 +1,4 @@
-package fooddeliverysystem.api.data;
+package fooddeliverysystem.data;
 
 public class FoodItem {
     private final int id; // from database
