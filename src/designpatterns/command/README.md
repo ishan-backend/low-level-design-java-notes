@@ -1,0 +1,4 @@
+- universally accepted pattern
+- signature of this pattern is also universally defined, 
+  - unlike strategy pattern where you define your own methods and return type
+  - here its execute method which takes nothing and gives nothing
