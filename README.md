@@ -1,4 +1,7 @@
-1. **Separation of Files**:
+**Install OpenJDK 17**:
+https://medium.com/java-mvp/install-openjdk-17-on-macos-c0ddb3ac9f0e
+
+3. **Separation of Files**:
     ```
     - enhanced code maintainability e.g. classes2 package
         - to solve bugs, go to just one file. Less resource / dev intensive to solve bugs

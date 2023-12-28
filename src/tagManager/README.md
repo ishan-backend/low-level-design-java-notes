@@ -32,3 +32,6 @@
 2. Abstracting out commands in interface makes it re-usable for some new product tomorrow, lets say ProductManager class, which would like to update it as master user
    1. Thus promoting re-usability
    2. interface for receiver class -> will make implementation conducive for tagManager, productManager etc.
+
+**Adding Undo Commands**:
+1. Rollback commands in the same sequence

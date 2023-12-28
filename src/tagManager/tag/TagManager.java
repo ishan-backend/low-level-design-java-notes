@@ -1,8 +1,7 @@
 package tagManager.tag;
 
 import tagManager.cmd.Command;
-
-import java.util.List;
+import java.util.Stack;
 
 /*
     TagManager sits below API call, and API can choose to call whichever method of this class based on operation type
@@ -35,15 +34,25 @@ import java.util.List;
                 This is similar to Strategy pattern.
 */
 public class TagManager {
-    private final Command command;
+    private final Stack<Command> commands; // to support undo we have used Stack
 
-    public TagManager(Command command) {
-        this.command = command;
+    public TagManager() {
+        this.commands = new Stack<>();
     }
 
     // Tag manipulations (CUD) - whichever command is inserted to TagManager, it will call subsequent execute
-    public void changeTags() {
-        this.command.execute();
+    public void changeTags(Command command) {
+        command.execute();
+        this.commands.push(command);
+    }
+
+    public void undo() {
+        if(commands.empty()) {
+            throw new RuntimeException("No command to undo");
+        }
+        Command command = commands.peek();
+        command.undo();
+        commands.pop();
     }
 
     // Read, other methods

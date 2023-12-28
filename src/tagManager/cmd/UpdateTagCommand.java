@@ -5,4 +5,9 @@ public class UpdateTagCommand implements Command{
     public void execute() {
 
     }
+
+    @Override
+    public void undo() {
+
+    }
 }

@@ -1,6 +1,7 @@
 package tagManager.main;
 
 import tagManager.apis.DeleteTagsAPI;
+import tagManager.apis.InsertTagAPI;
 import tagManager.data.MatchType;
 
 /*
@@ -10,6 +11,10 @@ import tagManager.data.MatchType;
 */
 public class TagChangeSimulator {
     public static void main(String[] args){
+        new InsertTagAPI().insertTag("fibonacci");
+
+        new DeleteTagsAPI().deleteTags("maths", MatchType.PERFECT);
+
         new DeleteTagsAPI().deleteTags("math.*", MatchType.PARTIAL);
     }
 }

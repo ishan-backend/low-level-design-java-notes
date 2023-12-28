@@ -16,4 +16,9 @@ public class PartialMatchDeleteCommand implements Command{
     public void execute() {
         this.partialMatchDeleter.delete(this.regex);
     }
+
+    @Override
+    public void undo() {
+
+    }
 }

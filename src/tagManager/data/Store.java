@@ -9,7 +9,7 @@ import java.util.List;
         - This is needed for our actual deleter implementations inside receiver
 */
 public class Store {
-    public static List<String> tags = new ArrayList<>()
+    public static List<String> tags = new ArrayList<String>()
     {
         {
             add("knapsack");

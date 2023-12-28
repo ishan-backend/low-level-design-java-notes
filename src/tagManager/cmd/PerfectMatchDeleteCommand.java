@@ -9,20 +9,38 @@ package tagManager.cmd;
 */
 
 import tagManager.rcv.PerfectMatchDeleter;
+import tagManager.rcv.TagInserter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerfectMatchDeleteCommand implements Command{
 
     // constructor injection on parameter on which execute will work
     private final String tagName;
     private final PerfectMatchDeleter perfectMatchDeleter;
-    public PerfectMatchDeleteCommand(String name, PerfectMatchDeleter perfectMatchDeleter) {
+
+    // to support undo() operations we need InsertTag Receiver concrete implementation
+    private final TagInserter tagInserter;
+    private final List<String> deletedTags;
+    public PerfectMatchDeleteCommand(String name, PerfectMatchDeleter perfectMatchDeleter, TagInserter tagInserter) {
         this.tagName = name;
         this.perfectMatchDeleter = perfectMatchDeleter;
+        this.tagInserter = tagInserter;
+        this.deletedTags = new ArrayList<>();
     }
 
     @Override
     public void execute() {
-        // delegates work to receiver deleter
-        this.perfectMatchDeleter.delete(tagName);
+        // delegates work to receiver deleter, and adds responses to deletedTags
+        this.deletedTags.addAll(this.perfectMatchDeleter.delete(this.tagName));
+    }
+
+    @Override
+    public void undo() {
+        for(String tag: deletedTags) {
+            tagInserter.insert(tag);
+        }
+        this.deletedTags.clear();
     }
 }
