@@ -1,0 +1,13 @@
+./cmd/UpdateTagCommand.java
+./cmd/Command.java
+./cmd/PerfectMatchDeleteCommand.java
+./cmd/InsertTagCommand.java
+./cmd/PartialMatchDeleteCommand.java
+./cmd/CommandFactory.java
+./rcv/PerfectMatchDeleter.java
+./rcv/PartialMatchDeleter.java
+./apis/DeleteTagsAPI.java
+./main/TagChangeSimulator.java
+./data/MatchType.java
+./data/Store.java
+./tag/TagManager.java
