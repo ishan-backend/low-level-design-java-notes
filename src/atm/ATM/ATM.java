@@ -1,18 +1,21 @@
 package atm.ATM;
 
+import atm.card.CardDetails;
+import atm.db.DBAccessor;
+import atm.state.ATMStateFactory;
 import atm.state.IATMState;
-import atm.state.ReadyState;
 
 public class ATM {
 
-    public final String machineId;
+    private final String machineId;
 //    private ATMState atmState;
     private IATMState atmState; // given atmState is private field, we won't be able to change it directly from concrete state classes, so we need a setter
 
     public ATM(String machineId) {
         this.machineId = machineId;
 //        this.atmState = ATMState.READY;
-        this.atmState = new ReadyState(this); // atmState is interface, so it can be = new of any class that implements this interface, this denotes current ATM instance
+//        this.atmState = new ReadyState(this); // atmState is interface, so it can be = new of any class that implements this interface, this denotes current ATM instance
+        this.atmState = ATMStateFactory.getState(DBAccessor.getATMState(this.machineId), this); // we use factory design pattern (creational responsibility) to convert the ENUM to relevant IATMState object
     }
 
     public int initTxn() {
@@ -64,18 +67,28 @@ public class ATM {
     public boolean cancelTxn(int txnId){
         return this.atmState.cancelTxn(txnId);
     }
-    public boolean isCardValidOnRead(String cardType, long cardNum, int pin, String name){
-        return this.atmState.isCardValidOnRead(cardType, cardNum, pin, name);
+    public boolean isCardValidOnRead(CardDetails cardDetails){
+        return this.atmState.isCardValidOnRead(cardDetails);
     }
-    public boolean readWithdrawlDetails(String cardType, long cardNum, int pin, String name, int amount) {
-        return this.atmState.readWithdrawlDetails(cardType, cardNum, pin, name, amount);
+//    public boolean readWithdrawlDetails(String cardType, long cardNum, int pin, String name, int amount) {
+//        return this.atmState.readWithdrawlDetails(cardType, cardNum, pin, name, amount);
+//    }
+
+    public boolean readWithdrawlDetails(CardDetails cardDetails, int transId, float amount) {
+        return this.atmState.readWithdrawlDetails(cardDetails, transId, amount);
     }
-    public boolean dispenseCash(int txnId){
+
+    public float dispenseCash(int txnId){
         return this.atmState.dispenseCash(txnId);
     }
     public void ejectCard(){
         this.atmState.ejectCard();
     }
 
-    public void changeState(IATMState newState){this.atmState = newState;}
+    public void changeState(IATMState newState){
+        this.atmState = newState;
+        DBAccessor.updateATMState(this.getMachineId(), this.atmState.getStateName()); // convert factory object to enum using getter
+    }
+
+    public String getMachineId() {return this.machineId;}
 }

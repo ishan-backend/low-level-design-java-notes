@@ -63,3 +63,17 @@
 6. **Now we have State Pattern**:
    Your core class, depends on abstract class/interface called State, which has different implementations.
    Within those implementations -> information of how to behave for different transitions and what change to bring about is contained. 
+7. **ATM class issues**:
+   1. this.atmState = new ReadyState(this); // still ATM depends on concrete class
+   2. whenever we are initialising ATM object, we are creating ReadyState object, which can have functional impacts
+   > To support distributed set of servers support -> we need to have database support (single source of truth), since every server has seperate RAM, and data of state will be only with one server, so others are clueless of current state if request goes to some other server.
+   > Different APIs can land at different servers. 
+8. **Now we can write full-fledged code**
+   1. Use factory design pattern to assign ENUM from DB to create IATMState objects
+   2. Create Data Class - CardDetails with relevant getters and enums (CardType); So instead of passing multiple fields, we can wrap it in data class. And update IATMClass method definitions
+9. **Card Manager Factory** on Card_Reading state:
+   1. Algorithms for validating different types of card (credit, debit) would differ from each other
+
+
+**Several other areas where same state design pattern is implemented**:
+- Vending Machine (exactly like ATM), other such state based systems
