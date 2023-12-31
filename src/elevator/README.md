@@ -44,5 +44,21 @@
 3. When DestinyElevatorAPI is called,
    > passed on to Elevator -> delegate further to corresponding state to handle it
    > Floor is a data class, so it should not change. But in future lets say we have forms of floor - residential/corporate. Then we can do abstraction there as well.
-4. 
 
+> **Elevator class**
+> * extensibly designed
+> * State is abstract
+> * MoveStore is abstract
+> * Which means we can inject concrete types of our choice and get class working
+> * Single Responsibility principle:
+>   * if we look at state - they only cater to job of state
+>   * if we look at moveStore - they only work for moves priortisation with all Data structures defined within it
+> * Elevator only talks to state, moveStore via interface and thus, does not worry about internal implementations
+> * Open Closed Principle:
+>   * Elevator Depends on abstract entities -> we allow class to be open for extension, closed for modification
+>   * Segregation of interfaces as IMoveStore and IElevatorState
+> * Dependency Inversion:
+>   * we depend on abstractions rather than concretions
+
+**Simulation**:
+- most import

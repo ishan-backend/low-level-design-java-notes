@@ -4,6 +4,18 @@ https://medium.com/java-mvp/install-openjdk-17-on-macos-c0ddb3ac9f0e
 **Problem Statements Collection and whether solved (Yes/No)**:
 - Implement online payment aggregator with multi payment gateway module
 
+**Most important things in LLD interview**:
+- Components you have written should be:
+    1. Extensible
+       1. SOLID principles
+    2. Maintainable
+        1. Cleanliness of code
+        2. Variable Naming
+        3. Modularity of code
+    3. Functional Correctness
+       1. At times, it might not be possible to ensure functional correctness across all real-world scenarios in interview
+       2. May have certain bugs / edge cases are remaining are relaxable if overall design is Good (extensible + maintainable).
+
 3. **Separation of Files**:
     ```
     - enhanced code maintainability e.g. classes2 package
