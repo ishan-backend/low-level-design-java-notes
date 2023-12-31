@@ -30,3 +30,19 @@
    1. When elevator is moving up -> it should move up until it has served all up requests, post that it should start moving down
    2. vice-versa
 
+**State diagram**:
+
+
+**Implementation steps**:
+1. Write API wrapper, data - Floor (class) and Direction (ENUM)
+2. Think about underlying classes:
+   1. Elevator class - represents the elevator
+   2. Identify use of State design pattern like ATM and create state interface and inject it in Elevator class
+      We imbibe abstraction, which ensures extensibility
+      Tomorrow, if new ElevatorState are included, then Elevator class will not have to worry about that
+   3. While writing concrete implementations of IElevatorState, write state diagram carefully, next state and what should happen
+3. When DestinyElevatorAPI is called,
+   > passed on to Elevator -> delegate further to corresponding state to handle it
+   > Floor is a data class, so it should not change. But in future lets say we have forms of floor - residential/corporate. Then we can do abstraction there as well.
+4. 
+

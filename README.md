@@ -1,6 +1,9 @@
 **Install OpenJDK 17**:
 https://medium.com/java-mvp/install-openjdk-17-on-macos-c0ddb3ac9f0e
 
+**Problem Statements Collection and whether solved (Yes/No)**:
+- Implement online payment aggregator with multi payment gateway module
+
 3. **Separation of Files**:
     ```
     - enhanced code maintainability e.g. classes2 package
