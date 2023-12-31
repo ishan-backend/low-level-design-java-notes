@@ -73,4 +73,7 @@
    2. Create Data Class - CardDetails with relevant getters and enums (CardType); So instead of passing multiple fields, we can wrap it in data class. And update IATMClass method definitions
 9. **Card Manager Factory** on Card_Reading state:
    1. Algorithms for validating different types of card (credit, debit) would differ from each other
-   2. 
+
+
+**Several other areas where same state design pattern is implemented**:
+- Vending Machine (exactly like ATM), other such state based systems
