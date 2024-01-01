@@ -55,5 +55,8 @@
          1. ParentForeignKey constraint - Mark has parent Student, we are implementing for Mark table
          2. Column mapping from parent table to child table
             1. Create ColumnMapping class
-         3. A table might have foreign key relationship with B, C tables, so as many objects of Constraint need to created for each pair
-      3. 
+         3. A table might have foreign key relationship with B, C tables, 
+            1. so as many objects of ForeignKeyConstraint need to created for different different tables
+
+5. Actual interaction with Sql will happen with commands:
+   1. Use command pattern - SqlCommand interface
