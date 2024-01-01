@@ -15,7 +15,7 @@ public class AnalyticsLogger implements ILogger{
     @Override
     public void log(LogLevel logLevel, String message) {
         if(logLevel.getLevel() == LogLevel.ERROR.getLevel()) {
-            //
+            // logs the error to third party dashboard
         }
         this.nextLogger.log(logLevel, message);
     }
