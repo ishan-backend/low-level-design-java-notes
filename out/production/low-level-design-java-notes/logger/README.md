@@ -50,3 +50,5 @@
     * Reason: logger is humongous object (logger -> publisher -> subscribers), used by everything else in application
     * So, as improvement, you can make your factory look like singleton class
     * When we would use Logger.Log, it would get to know of correct type and publish on relevant place
+
+* Todo: Thread synchronization - Handling concurrency issues, when you are writing to a file in a particular location

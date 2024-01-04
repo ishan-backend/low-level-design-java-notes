@@ -3,6 +3,7 @@ https://medium.com/java-mvp/install-openjdk-17-on-macos-c0ddb3ac9f0e
 
 **Problem Statements Collection and whether solved (Yes/No)**:
 - Implement online payment aggregator with multi payment gateway module
+- Implement slack
 
 **Most important things in LLD interview**:
 - Components you have written should be:
