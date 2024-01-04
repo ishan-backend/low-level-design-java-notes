@@ -33,4 +33,15 @@
 * Define Data classes: StockName, StockValue, Currency
 * Implement updateStock method of subscriber with logic
 * Now, run & test using Main function:
-  * 
+
+
+**Other questions using Observer pattern / Pub Sub model**
+1. Notification system for social-media service
+   * notification is published by (IPostPublisher) to a list of users/subscribers (IPostSubscriber)
+     * Concrete implementation List (categories of subscribers, which react to these updates differently) can be of AdminUsers, NonAdminUsers, UsersWhoCommentedOnAPost, UsersWhoLikedOnAPost, UsersWhoCreatedAPost, PostHasChanged
+     * These individual subscriber classes will be initialised with their states - list of users in them
+   
+2. E-Commerce store - buy and iphone(out of stock), then when inventory is backup again, request it to inform you.
+   * (IInventoryPublisher) publishes to subscribers
+   * Concrete implementations of IInventoryPublisher: IPhoneInventoryPublisher, VivoInventoryPublisher etc
+   * (IInventorySubscriber) concrete implementations: CustomerSubscribers with hashmap state, SupportStaffSubscribers with hashmap state
