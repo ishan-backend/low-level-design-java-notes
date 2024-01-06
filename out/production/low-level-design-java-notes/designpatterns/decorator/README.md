@@ -1,15 +1,4 @@
-**Decorator pattern use-cases (delegation of work)**:
-
-* domino's
-* writer to help write in console, file
-* BufferedReader, FileReader
-    ```Java
-        Reader reader = new BufferedReader(new FileReader);
-        // decorated file reader with buffered reader
-        // file is located in disk
-        // what file is reading, buffered reader will store in RAM in buffer
-        // when we decorate, we get new complex functionality
-    ```
+**Decorator pattern**:
 
 **Requirements for Design Domino's Pizza**:
     - Ordering component
@@ -23,7 +12,7 @@ But our scope will be limited to:
 
 **Lets make requirement more concrete**:
 * One Base of pizza - can be of different varieties (Thin crust, Wheat, etc)
-* Toppings on Base (Onion, Cheese), thus functionalities of toppings can be clubbed together
+* Toppings on Base (Onion, Cheese)
 * Layered Topping on one another (Olive + Corn)
 
 * Complete entity is a Pizza

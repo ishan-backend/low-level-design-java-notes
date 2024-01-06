@@ -28,7 +28,7 @@
 
 **APIs**:
 
-**Decoupling/Separation of responsibilities- finding a spot , FindParkingSpotAPI ; - allocating spot , GetTicketAPI**
+**Decoupling/Separation of responsibilities: for finding a spot -> FindParkingSpotAPI ; for allocating spot -> GetTicketAPI**
 
 at entry:
 * FindParkingSpotAPI(EntryPoint, VehicleType, SpotSelectionStrategy) -> Returns ParkingSpot
@@ -44,4 +44,46 @@ at exit:
 * On success of PayParkingFeeAPI, VacateParkingSpotAPI() -> change state of ParkingSpot to FREE
 
 **Classes**:
-* Write APIs classes first
+* Write APIs classes first:
+  * FindParkingSpotAPI Class with public method which returns ParkingSpot
+    * EntryPoint should be Data Class (not enum), in future if you want to add EntryPoint you just have to add them to DB without touching application code.
+      * can have certain attributes (name, isOpen)
+    * VehicleType - ENUM , since this is not changing frequently
+    * SpotSelectionStrategy - Random, NearestFirst, ENUM
+  * Make the Data classes for above arguments
+  * Implementation:
+    * Approach 1:
+      * because there are different parking areas for different vehicle types
+      * invoke different functions, which could run different queries for different vehicle types using if-else
+        ```java
+        if(...){
+          concreteT1.do()
+        } elseif(...) {
+          concreteT2.do()
+        } else {
+          concreteT3.do()
+        }
+        ```
+    * Approach 2:
+      * Create IVehicleTypeManager interface and all of implementations can be concrete type
+      * We create package manager for it, with interface IVehicleTypeManager with methods:
+        * List<ParkingSpot> GetParkingSpots();
+        * double getParkingFees(double durationHours);
+      * IVehicleTypeManager has 3 concrete implementations:
+        * TwoWheelerManager, ThreeWheelerManager, HeavyVehicleManager
+        * We want to instantiate these classes **using Factory** (all creation logic should reside in a single class) - VehicleTypeManagerFactory
+          * keeping factory stateless
+            * constructor is private
+            * all other methods static
+          -> users of factory wont have to use new keyword for creating its objects and invoking methods
+      * DIP - code for abstractions rather than concretions
+        * frees you from nasty if-else checks
+        * enjoy better extensibility on high level classes
+        ```java
+        abstractT.do()
+        ```
+    * Spot Selection Strategy:
+      * a function which takes in arguments() - does some logic and returns ParkingSlot
+      * nearest strategy depends on entry gate, while random one does not
+      * Factory function
+        
