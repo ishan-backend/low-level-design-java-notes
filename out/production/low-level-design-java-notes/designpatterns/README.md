@@ -8,6 +8,8 @@
 
 **Factory and Abstract Factory**:
 
+**Iterator**:
+
 **Strategy**:
 DIP and Strategy pattern go hand in hand.
 

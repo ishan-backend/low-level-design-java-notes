@@ -6,6 +6,7 @@
     * local file system
     * written to cmd/console
     * sent to third party system
+    * database
   * system should be configurable enough for us to add loggers for different severity logs to destine it to his choice
 * ensure a log statement can be processed by multiple loggers
   * e.g. severity - error
