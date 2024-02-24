@@ -1,4 +1,5 @@
 https://leetcode.com/discuss/interview-question/4615686/PhonePe-or-SDE2-or-Machine-coding-Round-or-24-hours
+https://www.youtube.com/watch?v=zRz1GPSH50I&list=PLJN9ydlFnJsiEgyjO3D3yBhtiENymhF8G&index=1
 
 **Mandatory Requirements:**
 
