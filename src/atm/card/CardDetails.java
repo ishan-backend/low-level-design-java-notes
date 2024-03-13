@@ -1,6 +1,10 @@
 package atm.card;
 
+import lombok.Getter;
+import lombok.NonNull;
+
 // CardDetails is a data class for arguments and has getters
+@Getter
 public class CardDetails {
     private final CardType cardType;
     private final long cardNumber;
